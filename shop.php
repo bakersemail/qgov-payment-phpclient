@@ -48,7 +48,7 @@
 						<p class="ssq-minicart-noscript">Edit cart or checkout to place your order.</p>
 						<div class="ssq-minicart-submit">
 							<input type="hidden" id="ssq-cart-contents" name="ssq-cart-contents" value="" /> 
-								<img src="https://test.smartservice.qld.gov.au/payment/minicart/synchronise?cartId=<?php cartId();?>" id="ssq-synch-img" height="0" width="0" alt="" />
+								<img src="https://test.smartservice.qld.gov.au/payment/minicart/synchronise?cartId=<?php getCartId();?>" id="ssq-synch-img" height="0" width="0" alt="" />
 								<a href="https://test.smartservice.qld.gov.au/payment/cart/checkout" id="ssq-cart-checkout"><img id="ssq_minicart_checkout" src="https://test.smartservice.qld.gov.au/payment/minicart/btn-checkout.png" alt="Checkout" /></a>
 								<a href="https://test.smartservice.qld.gov.au/payment/cart/view" id="ssq-cart-edit"><img id="ssq_minicart_cart" src="https://test.smartservice.qld.gov.au/payment/minicart/btn-cart.png" alt="Edit cart" /></a>
 						</div>
