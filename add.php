@@ -1,48 +1,52 @@
 <?php
-	function send($request) {
-		$ch = curl_init('https://test.smartservice.qld.gov.au/payment/service/');
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$output = curl_exec($ch);
-		curl_close($ch);
-
-		return strpos($output, '<status>OK</status>') !== false;
+	require 'soapclient.php';
+	
+	function createRequest($cartId) {
+		error_log("Adding to cart: $cartId");
+		if ($cartId) {
+			$cartId = "<cartId>$cartId</cartId>";
+		}	
+		
+		$notifyUri = "http://$_SERVER[HTTP_HOST]/notify.php";
+		$currentUri = "http://$_SERVER[HTTP_HOST]/shop.php";
+		$downloadUri = "http://$_SERVER[HTTP_HOST]/download.php";
+		$serviceId = "123"; #TODO - match to an item
+		
+		$tokens = array("@CART_ID@", "@NOTIFY_URI@", "@CURRENT_URI@", "@DOWNLOAD_URI@", "@SERVICE_ID@");
+		$values = array("$cartId", "$notifyUri", "$currentUri", "$downloadUri", "$serviceId");
+		$template ='
+			<CartAddRequest>@CART_ID@
+				<order>
+					<onlineService id="test" name="Test Service" notify="@NOTIFY_URI@?serviceId=@SERVICE_ID@" prev="@CURRENT_URI@" next="@CURRENT_URI@"/>
+					<orderline id="orderline id">
+						<product title="Test product"
+							ref="reference" cost="123" gst="45"
+							agency="Test agency"
+							description="Test product description"
+							disbursementId="999">
+							<accounting costCenter="ABC" glCode="A-2A-123" taxCode="FT" narrative="Test narrative"/>
+							<distribution title="Test download">
+								<resource link="@DOWNLOAD_URI@?serviceId=@SERVICE_ID@" type="Test download" size="1 kb" />
+							</distribution>
+						</product>
+					</orderline>
+				</order>
+			</CartAddRequest>';
+		return str_replace($tokens, $values, $template);
 	}
-?>
-
-<?php	
-	$cartId = $_REQUEST['ssqCartId'];
+	
 	$username = $_REQUEST['username'];
 	$passphrase = $_REQUEST['passphrase'];
+	$cartId = $_REQUEST['ssqCartId'];
+	$body = createRequest($cartId);
 	
-	if ($cartId) {
-		$cartId = "<cartId>$cartId</cartId>";
-	}	
-	
-	$notifyUri = "http://$_SERVER[HTTP_HOST]/notify.php";
-	$currentUri = "http://$_SERVER[HTTP_HOST]/shop.php";
-	$downloadUri = "http://$_SERVER[HTTP_HOST]/download.php";
-	$namespace = "http://smartservice.qld.gov.au/payment/schemas/shopping_cart_1_3";
-	$serviceId = "123"; #TODO - match to an item
-	$nonce = rand(0, 99999999);
-	$nonceBase64 = base64_encode($nonce);
-	
-	date_default_timezone_set('GMT');
-	$created = date("Y-m-d")."T".date("H:i:s.000")."Z";
-	$password = base64_encode(sha1($nonce.$created.$passphrase, true));
-	
-	$template = file_get_contents("request.xml");
-	
-	$tokens = array("@CART_ID@", "@NOTIFY_URI@", "@CURRENT_URI@", "@DOWNLOAD_URI@", "@SERVICE_ID@", "@NAMESPACE@", "@CREATED@", "@USERNAME@", "@PASSWORD@", "@NONCE@");
-	$values = array("$cartId", "$notifyUri", "$currentUri", "$downloadUri", "$serviceId", "$namespace", "$created", "$username", "$password", "$nonceBase64");
-	$request = str_replace($tokens, $values, $template);
-	
-	if (send($request)) {
+	$result = send($username, $passphrase, $body);
+	if (strpos($result, '<status>OK</status>') !== false) {
+		error_log("Successfully added to cart: $cartId");
 		header("Location: shop.php");
 		return;
 	}
 	
+	error_log("Request failed: $result");
 	echo "Something went wrong";
 ?>
