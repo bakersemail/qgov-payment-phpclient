@@ -35,12 +35,10 @@
 		return str_replace($tokens, $values, $template);
 	}
 	
-	$username = $_REQUEST['username'];
-	$passphrase = $_REQUEST['passphrase'];
 	$cartId = $_REQUEST['ssqCartId'];
 	$body = createRequest($cartId);
 	
-	$result = send($username, $passphrase, $body);
+	$result = send($body);
 	if (strpos($result, '<status>OK</status>') !== false) {
 		error_log("Successfully added to cart: $cartId");
 		header("Location: shop.php");

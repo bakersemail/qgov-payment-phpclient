@@ -20,15 +20,9 @@
 
 <body>
 	<form action="add.php" method="POST">
-		<label for="username">Username</label>
-		<input id="username" type="text" name="username" value="test" />
-		<label for="passphrase">Passphrase</label>
-		<input id="passphrase" type="text" name="passphrase" value="test" />
 		<input type="submit" value="Add" />
-		<br/>
-		Cart ID:
 		<script type="text/javascript"><!--     
-			document.write('<input type="text" name="ssqCartId" value="' + SSQ.cart.id + '" />'); 
+			document.write('<input type="hidden" name="ssqCartId" value="' + SSQ.cart.id + '" />'); 
 		// --></script> 
 		
 	</form>

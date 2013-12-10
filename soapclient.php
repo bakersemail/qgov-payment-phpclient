@@ -28,7 +28,10 @@
 		return $request;
 	}
 	
-	function send($username, $passphrase, $body) {
+	function send($body) {
+		$ini = parse_ini_file('/etc/qgov-payment-conf.ini');
+		$username = $ini['username'];
+		$passphrase = $ini['passphrase'];
 		$envelope = createEnvelope($username, $passphrase);
 		$request = str_replace('@BODY@', $body, $envelope);
 		return sendData($request);
