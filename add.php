@@ -7,8 +7,8 @@
 			$cartId = "<cartId>$cartId</cartId>";
 		}	
 		
+		$currentUri = $_SERVER["HTTP_REFERER"];
 		$notifyUri = "http://$_SERVER[HTTP_HOST]/notify.php";
-		$currentUri = "http://$_SERVER[HTTP_HOST]/shop.php";
 		$downloadUri = "http://$_SERVER[HTTP_HOST]/download.php";
 		$serviceId = "123"; #TODO - match to an item
 		
