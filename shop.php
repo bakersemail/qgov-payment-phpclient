@@ -1,5 +1,7 @@
 <?php
-	function cartId() {
+	function getCartId() {
+		#TODO - get and set cartId from result in cookies so that javascript is not required.
+		#TODO - make use of synchronise to ensure that user sessions are sync'd with the target cart.
 	}
 ?>
 
