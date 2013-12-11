@@ -32,6 +32,7 @@
 		return 1;
 	}
 
+	error_log("Received notify for serviceId: $serviceId orderId: $orderId");
 	$body = createOrderStatusRequest($orderId);
 	$namespace = 'http://smartservice.qld.gov.au/payment/schemas/payment_api_1_3';
 	$result = send($body, $namespace);
