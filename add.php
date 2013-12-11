@@ -8,16 +8,18 @@
 			$cartId = "<cartId>$cartId</cartId>";
 		}	
 		
-		$currentUri = $_SERVER["HTTP_REFERER"];
-		$notifyUri = "http://$_SERVER[HTTP_HOST]/notify.php";
-		$downloadUri = "http://$_SERVER[HTTP_HOST]/download.php";
+		$ini = parse_ini_file('/etc/qgov-payment-conf.ini');
+		$context = $ini['context'];		
+		$notifyUri = "http://$_SERVER[HTTP_HOST]$context/notify.php";
+		$downloadUri = "http://$_SERVER[HTTP_HOST]$context/download.php";
+		$shopUri = "http://$_SERVER[HTTP_HOST]$context/shop.php";
 		
-		$tokens = array("@CART_ID@", "@NOTIFY_URI@", "@CURRENT_URI@", "@DOWNLOAD_URI@", "@SERVICE_ID@");
-		$values = array("$cartId", "$notifyUri", "$currentUri", "$downloadUri", "$serviceId");
+		$tokens = array("@CART_ID@", "@NOTIFY_URI@", "@SHOP_URI@", "@DOWNLOAD_URI@", "@SERVICE_ID@");
+		$values = array("$cartId", "$notifyUri", "$shopUri", "$downloadUri", "$serviceId");
 		$template ='
 			<CartAddRequest>@CART_ID@
 				<order>
-					<onlineService id="test" name="Test Service" notify="@NOTIFY_URI@?serviceId=@SERVICE_ID@" prev="@CURRENT_URI@" next="@CURRENT_URI@"/>
+					<onlineService id="test" name="Test Service" notify="@NOTIFY_URI@?serviceId=@SERVICE_ID@" prev="@SHOP_URI@" next="@SHOP_URI@"/>
 					<orderline id="@SERVICE_ID@">
 						<product title="Test product"
 							ref="reference" cost="123" gst="45"

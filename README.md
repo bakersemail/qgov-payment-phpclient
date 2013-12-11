@@ -5,7 +5,11 @@ Create a file: "/etc/qgov-payment-conf.ini" with your online service configurati
 
 e.g.
 
-	[onlineservice]
+	[webservices]
 	username=test
 	passphrase=test
+	
+	[site]
+	#used as base for: shop.php, notify.php and download.php 
+	context=/mywebsite
 
