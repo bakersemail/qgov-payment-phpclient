@@ -1,5 +1,5 @@
 <?php
-	function createEnvelope($username, $passphrase) {
+	function createEnvelope($username, $passphrase, $namespace) {
 		$template = '<?xml version="1.0" encoding="utf-8"?>
 			<soapenv:Envelope xmlns="@NAMESPACE@" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
 				<soapenv:Header>
@@ -14,7 +14,6 @@
 				</soapenv:Header>
 				<soapenv:Body>@BODY@</soapenv:Body>
 			</soapenv:Envelope>';
-		$namespace = "http://smartservice.qld.gov.au/payment/schemas/shopping_cart_1_3";
 		$nonce = rand(0, 99999999);
 		$nonceBase64 = base64_encode($nonce);
 		
@@ -28,11 +27,11 @@
 		return $request;
 	}
 	
-	function send($body) {
+	function send($body, $namespace) {
 		$ini = parse_ini_file('/etc/qgov-payment-conf.ini');
 		$username = $ini['username'];
 		$passphrase = $ini['passphrase'];
-		$envelope = createEnvelope($username, $passphrase);
+		$envelope = createEnvelope($username, $passphrase, $namespace);
 		$request = str_replace('@BODY@', $body, $envelope);
 		return sendData($request);
 	}

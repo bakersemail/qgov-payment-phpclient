@@ -1,7 +1,8 @@
 <?php
 	require 'soapclient.php';
+	require 'dao.php';
 	
-	function createRequest($cartId) {
+	function createRequest($cartId, $serviceId) {
 		error_log("Adding to cart: $cartId");
 		if ($cartId) {
 			$cartId = "<cartId>$cartId</cartId>";
@@ -10,7 +11,6 @@
 		$currentUri = $_SERVER["HTTP_REFERER"];
 		$notifyUri = "http://$_SERVER[HTTP_HOST]/notify.php";
 		$downloadUri = "http://$_SERVER[HTTP_HOST]/download.php";
-		$serviceId = "123"; #TODO - match to an item
 		
 		$tokens = array("@CART_ID@", "@NOTIFY_URI@", "@CURRENT_URI@", "@DOWNLOAD_URI@", "@SERVICE_ID@");
 		$values = array("$cartId", "$notifyUri", "$currentUri", "$downloadUri", "$serviceId");
@@ -18,7 +18,7 @@
 			<CartAddRequest>@CART_ID@
 				<order>
 					<onlineService id="test" name="Test Service" notify="@NOTIFY_URI@?serviceId=@SERVICE_ID@" prev="@CURRENT_URI@" next="@CURRENT_URI@"/>
-					<orderline id="orderline id">
+					<orderline id="@SERVICE_ID@">
 						<product title="Test product"
 							ref="reference" cost="123" gst="45"
 							agency="Test agency"
@@ -36,11 +36,17 @@
 	}
 	
 	$cartId = $_REQUEST['ssqCartId'];
-	$body = createRequest($cartId);
-	
-	$result = send($body);
+	$serviceId = createServiceId();
+	$body = createRequest($cartId, $serviceId);
+	$namespace = 'http://smartservice.qld.gov.au/payment/schemas/shopping_cart_1_3';
+	$result = send($body, $namespace);
 	if (strpos($result, '<status>OK</status>') !== false) {
-		error_log("Successfully added to cart: $cartId");
+		$cleanedForPhp = str_replace('xmlns=', 'ns=', $result);
+		$xml = new SimpleXMLElement($cleanedForPhp);
+		$orderId = $xml->xpath('//generatedOrderId');
+		$orderId = $orderId[0];
+		error_log("Successfully added to cart: $cartId with Order ID: $orderId");
+		saveService($serviceId, $orderId);
 		header("Location: shop.php");
 		return;
 	}
