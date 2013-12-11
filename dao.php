@@ -1,6 +1,6 @@
 <?php
 	function findByServiceId($serviceId) {
-		return '123';
+		return '110018'; #a known paid generatedOrderId for testing
 	}
 	
 	function findByOrderId($orderId) {
