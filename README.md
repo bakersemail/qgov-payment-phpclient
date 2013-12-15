@@ -8,6 +8,7 @@ e.g.
 	[webservices]
 	username=test
 	passphrase=test
+	papiDomainAndContext=https://test.smartservice.qld.gov.au/payment
 	
 	[site]
 	#used as base for: shop.php, notify.php and download.php 

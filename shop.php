@@ -1,5 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <?php
+	require_once 'config.php';
+	$ini = getIni();
+	$papiDomainAndContext = $ini['papiDomainAndContext'];
+	
+
 	function getCartId() {
 		#TODO - get and set cartId from result in cookies so that javascript is not required.
 		#TODO - make use of synchronise to ensure that user sessions are sync'd with the target cart.
@@ -10,7 +15,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>qgov-payment-phpclient</title>
 
-    <link rel="stylesheet" href="/payment/ui/payment-swe.css" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="//static.qgov.net.au/assets/v2/style/qgov.css" media="all" />
 	<!--[if lt IE 9]><link rel="stylesheet" href="//static.qgov.net.au/assets/v2/style/qgov-ie.css" type="text/css" media="all" /><![endif]-->
 	
@@ -30,11 +34,11 @@
 	<script type="text/javascript" src="//static.qgov.net.au/assets/v2/script/ie-layout.js"></script>
 	<![endif]-->
 	<link type="text/css"
-		href="https://test.smartservice.qld.gov.au/payment/ui/minicart_1.0.css"
+		href="<?php echo $papiDomainAndContext."/ui/minicart_1.0.css"?>"
 		rel="stylesheet" />
-	<script	src="https://test.smartservice.qld.gov.au/payment/minicart/contents_1.0.js"
+	<script	src="<?php echo $papiDomainAndContext."/minicart/contents_1.0.js"?>"
 		type="text/javascript"></script>
-    <script type="text/javascript" src="https://test.smartservice.qld.gov.au/payment/outage/outage_warnings.js"></script>
+    <script type="text/javascript" src="<?php echo $papiDomainAndContext."/outage/outage_warnings.js"?>"></script>
 </head>
 
 <body id="qld-gov-au" class="cart">
@@ -141,24 +145,24 @@
 				<div id="ssq-minicart-view">
 					<script type="text/javascript"> <!--
 						document.write('<div class="ssq-minicart-loading"><p>Loading <a href=">');
-						https://test.smartservice.qld.gov.au/payment/cart/view">cart</a>...</p></div             
+						<?php echo $papiDomainAndContext."/cart/view"?>">cart</a>...</p></div             
 						// --> </script>
 						
 					<noscript>
 						<p class="ssq-minicart-noscript">Edit cart or checkout to place your order.</p>
 						<div class="ssq-minicart-submit">
 							<input type="hidden" id="ssq-cart-contents" name="ssq-cart-contents" value="" /> 
-								<img src="https://test.smartservice.qld.gov.au/payment/minicart/synchronise?cartId=<?php getCartId();?>" id="ssq-synch-img" height="0" width="0" alt="" />
-								<a href="https://test.smartservice.qld.gov.au/payment/cart/checkout" id="ssq-cart-checkout"><img id="ssq_minicart_checkout" src="https://test.smartservice.qld.gov.au/payment/minicart/btn-checkout.png" alt="Checkout" /></a>
-								<a href="https://test.smartservice.qld.gov.au/payment/cart/view" id="ssq-cart-edit"><img id="ssq_minicart_cart" src="https://test.smartservice.qld.gov.au/payment/minicart/btn-cart.png" alt="Edit cart" /></a>
+								<img src="<?php echo $papiDomainAndContext."/minicart/synchronise?cartId="?><?php getCartId();?>" id="ssq-synch-img" height="0" width="0" alt="" />
+								<a href="<?php echo $papiDomainAndContext."/cart/checkout"?>" id="ssq-cart-checkout"><img id="ssq_minicart_checkout" src="<?php echo $papiDomainAndContext."/minicart/btn-checkout.png"?>" alt="Checkout" /></a>
+								<a href="<?php echo $papiDomainAndContext."/cart/view"?>" id="ssq-cart-edit"><img id="ssq_minicart_cart" src="<?php echo $papiDomainAndContext."/minicart/btn-cart.png"?>" alt="Edit cart" /></a>
 						</div>
 					</noscript>
 				</div>
 				<div class="ssq-minicart-cards">
 					<h3>Cards accepted</h3>
 					<ul>
-						<li><img src="https://test.smartservice.qld.gov.au/payment/minicart/visa.png" alt="Visa" /></li>
-						<li><img src="https://test.smartservice.qld.gov.au/payment/minicart/mastercard.png" alt="MasterCard" /></li>
+						<li><img src="<?php echo $papiDomainAndContext."/minicart/visa.png"?>" alt="Visa" /></li>
+						<li><img src="<?php echo $papiDomainAndContext."/minicart/mastercard.png"?>" alt="MasterCard" /></li>
 					</ul>
 				</div>
 			</div>
@@ -367,12 +371,8 @@
 <div id="scripts">
 	<script type="text/javascript" src="//static.qgov.net.au/assets/v2/script/loader.js"></script>
 	<script type="text/javascript" src="//static.qgov.net.au/assets/v2/script/init.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"
-		type="text/javascript"></script>
-	<script
-		src="https://test.smartservice.qld.gov.au/payment/ui/minicart_1.0.js"
-		type="text/javascript"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+	<script	src="<?php echo $papiDomainAndContext."/ui/minicart_1.0.js"?>" type="text/javascript"></script>
 </div>
 
 </html>

@@ -1,4 +1,6 @@
 <?php
+	require_once 'config.php';
+
 	function createEnvelope($username, $passphrase, $namespace) {
 		$template = '<?xml version="1.0" encoding="utf-8"?>
 			<soapenv:Envelope xmlns="@NAMESPACE@" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
@@ -28,16 +30,17 @@
 	}
 	
 	function send($body, $namespace) {
-		#$ini = parse_ini_file('/etc/qgov-payment-conf.ini');
-		$username = 'test';#$ini['username'];
-		$passphrase = 'test';#$ini['passphrase'];
+		$ini = getIni();
+		$papiDomainAndContext = $ini['papiDomainAndContext'];
+		$username = $ini['username'];
+		$passphrase = $ini['passphrase'];
 		$envelope = createEnvelope($username, $passphrase, $namespace);
 		$request = str_replace('@BODY@', $body, $envelope);
-		return sendData($request);
+		return sendData($request, $papiDomainAndContext);
 	}
 
-	function sendData($request) {
-		$ch = curl_init('https://test.smartservice.qld.gov.au/payment/service/');
+	function sendData($request, $papiDomainAndContext) {
+		$ch = curl_init($papiDomainAndContext.'/service/');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);

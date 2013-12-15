@@ -1,6 +1,7 @@
 <?php
-	require 'soapclient.php';
-	require 'dao.php';
+	require_once 'config.php';
+	require_once 'soapclient.php';
+	require_once 'dao.php';
 	
 	function payServices($orderId, $namespace) {
 		$body = createOrderQueryRequest($orderId);

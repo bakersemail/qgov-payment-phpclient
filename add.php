@@ -1,6 +1,7 @@
 <?php
-	require 'soapclient.php';
-	require 'dao.php';
+	require_once 'config.php';
+	require_once 'soapclient.php';
+	require_once 'dao.php';
 	
 	function createRequest($cartId, $serviceId) {
 		error_log("Adding to cart: $cartId");
@@ -8,8 +9,8 @@
 			$cartId = "<cartId>$cartId</cartId>";
 		}	
 		
-		#$ini = parse_ini_file('/etc/qgov-payment-conf.ini');
-		$context = '';#$ini['context'];		
+		$ini = getIni();
+		$context = $ini['context'];		
 		$notifyUri = "http://$_SERVER[HTTP_HOST]$context/notify.php";
 		$downloadUri = "http://$_SERVER[HTTP_HOST]$context/download.php";
 		$shopUri = "http://$_SERVER[HTTP_HOST]$context/shop.php";
