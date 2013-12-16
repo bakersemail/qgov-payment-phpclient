@@ -144,8 +144,7 @@
 				<h2>Cart</h2>
 				<div id="ssq-minicart-view">
 					<script type="text/javascript"> <!--
-						document.write('<div class="ssq-minicart-loading"><p>Loading <a href=">');
-						<?php echo $papiDomainAndContext."/cart/view"?>">cart</a>...</p></div             
+						document.write('<div class="ssq-minicart-loading"><p>Loading <a href="<?php echo $papiDomainAndContext."/cart/view"?>">cart</a>...</p></div>');
 						// --> </script>
 						
 					<noscript>
