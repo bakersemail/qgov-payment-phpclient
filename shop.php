@@ -189,7 +189,7 @@
 			<a href="//www.qld.gov.au/share/?via=facebook&amp;title=Cart" title="Share using Facebook"><img src="//static.qgov.net.au/assets/v2/images/skin/button-share-facebook.png" alt="Share using Facebook" /></a>
 			<a href="//www.qld.gov.au/share/?via=twitter&amp;title=Cart" title="Share using Twitter"><img src="//static.qgov.net.au/assets/v2/images/skin/button-share-twitter.png" alt="Share using Twitter" /></a>
 			<a href="//www.qld.gov.au/share/?via=linkedin&amp;title=Cart" title="Share using LinkedIn"><img src="//static.qgov.net.au/assets/v2/images/skin/button-share-linkedin.png" alt="Share using LinkedIn" /></a>
-			<a href="//www.qld.gov.au/share/?title=Cart" title="Share using another service…"><img src="//static.qgov.net.au/assets/v2/images/skin/button-share-more.png" alt="Share using another service…" /></a>
+			<a href="//www.qld.gov.au/share/?title=Cart" title="Share using another service..."><img src="//static.qgov.net.au/assets/v2/images/skin/button-share-more.png" alt="Share using another service..." /></a>
 		</li>
 	</ul>
 </div>
@@ -223,7 +223,7 @@
 				</fieldset>
 			</li>
 			<li class="instruction">
-				<p>We want this information to be the best it can be and we know we can’t do it without you.
+				<p>We want this information to be the best it can be and we know we can't do it without you.
 				Let us know what you thought of this page and what other information you would like to see.</p>
 				<p>We do not reply to feedback. <a href="//www.qld.gov.au/contact-us/">Contact us if you need a response</a>.</p>
 			</li>
