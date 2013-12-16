@@ -114,7 +114,7 @@
             <div class="article"><div class="box-sizing"><div class="border">
 <!-- Global alert -->
 
-<form action="add.php" method="POST">
+<form action="add.php" method="post">
 		<ul class="actions">
 			<li>
 			<strong>
@@ -373,5 +373,5 @@
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
 	<script	src="<?php echo $papiDomainAndContext."/ui/minicart_1.0.js"?>" type="text/javascript"></script>
 </div>
-
+</body>
 </html>
