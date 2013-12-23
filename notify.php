@@ -6,8 +6,7 @@
   function payServices($orderId, $namespace) {
     $body = createOrderQueryRequest($orderId);
     $result = send($body, $namespace);
-    error_log("Order query result: $result");
-	
+
 	$cleanedForPhp = str_replace('xmlns=', 'ns=', $result);
     $xml = new SimpleXMLElement($cleanedForPhp);
     $orderlines = $xml->xpath('//orderline');
