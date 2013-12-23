@@ -7,14 +7,14 @@
     $body = createOrderQueryRequest($orderId);
     $result = send($body, $namespace);
 
-	$cleanedForPhp = str_replace('xmlns=', 'ns=', $result);
+    $cleanedForPhp = str_replace('xmlns=', 'ns=', $result);
     $xml = new SimpleXMLElement($cleanedForPhp);
     $orderlines = $xml->xpath('//orderline');
 	$serviceIds = array();
-	foreach ($orderlines as $orderline) {
-		$attrs = $orderline->attributes();
-		$serviceIds[] = $attrs['id'];
-	}
+    foreach ($orderlines as $orderline) {
+      $attrs = $orderline->attributes();
+      $serviceIds[] = $attrs['id'];
+    }
     
     setPaid($serviceIds);
   }
