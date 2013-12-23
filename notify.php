@@ -10,7 +10,7 @@
     $cleanedForPhp = str_replace('xmlns=', 'ns=', $result);
     $xml = new SimpleXMLElement($cleanedForPhp);
     $orderlines = $xml->xpath('//orderline');
-	$serviceIds = array();
+    $serviceIds = array();
     foreach ($orderlines as $orderline) {
       $attrs = $orderline->attributes();
       $serviceIds[] = $attrs['id'];
