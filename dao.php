@@ -7,6 +7,12 @@
 	return $result;
   }
   
+  function setPaid($serviceIds) {
+	$idsStr = implode(", ", $serviceIds);
+	error_log("Setting paid: $idsStr");
+	_setPaid($serviceIds);
+  }
+    
   function saveService($serviceId, $orderId) {
 	error_log("Saving Service ID: $serviceId / Order ID: $orderId");
     return _saveService($serviceId, $orderId);

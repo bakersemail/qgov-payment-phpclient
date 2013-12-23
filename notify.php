@@ -6,9 +6,18 @@
   function payServices($orderId, $namespace) {
     $body = createOrderQueryRequest($orderId);
     $result = send($body, $namespace);
-    
-    #TODO - get serviceIds (orderLineId) and set each as paid (only once - notifies can happen multiple times)
     error_log("Order query result: $result");
+	
+	$cleanedForPhp = str_replace('xmlns=', 'ns=', $result);
+    $xml = new SimpleXMLElement($cleanedForPhp);
+    $orderlines = $xml->xpath('//orderline');
+	$serviceIds = array();
+	foreach ($orderlines as $orderline) {
+		$attrs = $orderline->attributes();
+		$serviceIds[] = $attrs['id'];
+	}
+    
+    setPaid($serviceIds);
   }
   
   function createOrderStatusRequest($orderId) {
@@ -38,8 +47,8 @@
   $namespace = 'http://smartservice.qld.gov.au/payment/schemas/payment_api_1_3';
   $result = send($body, $namespace);
   if (strpos($result, '<status>PAID</status>') !== false) {
-    error_log("Successful notification for serviceId: $serviceId");
     payServices($orderId, $namespace);
+    error_log("Successful notification for serviceId: $serviceId");
     echo "Done";
     return;
   }

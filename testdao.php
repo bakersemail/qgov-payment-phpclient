@@ -6,6 +6,9 @@
   function _saveService($serviceId, $orderId) {
   }
   
+  function _setPaid($serviceIds) {
+  }
+  
   function _createServiceId() {
     return '123';
   } 
