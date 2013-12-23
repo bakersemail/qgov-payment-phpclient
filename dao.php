@@ -1,15 +1,15 @@
 <?php
-  function findByServiceId($serviceId) {
-    return '110018'; #a known paid generatedOrderId for testing
-  }
+  require_once 'sqlitedao.php';
   
-  function findByOrderId($orderId) {
+  function findByServiceId($serviceId) {
+    return _findByServiceId($serviceId);
   }
   
   function saveService($serviceId, $orderId) {
+    return _saveService($serviceId, $orderId);
   }
   
   function createServiceId() {
-    return '123';
+    return _createServiceId();
   }
 ?>
