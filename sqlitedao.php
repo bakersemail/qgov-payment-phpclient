@@ -6,15 +6,15 @@
       die('Could not create db');
     }
     
-	$sql->exec("CREATE TABLE IF NOT EXISTS SERVICES (ID INTEGER PRIMARY KEY, SERVICE_ID INTEGER UNIQUE, ORDER_ID INTEGER, PAID INTEGER);");
+    $sql->exec("CREATE TABLE IF NOT EXISTS SERVICES (ID INTEGER PRIMARY KEY, SERVICE_ID INTEGER UNIQUE, ORDER_ID INTEGER, PAID INTEGER);");
     return $sql;
   }
   
   function _setPaid($serviceIds) {
-	$sql = createDb();
-	$idsStr = implode(", ", $serviceIds);
+    $sql = createDb();
+    $idsStr = implode(", ", $serviceIds);
     $q = $sql->exec("UPDATE SERVICES SET PAID=1 WHERE SERVICE_ID IN ($idsStr);");
-	return $q;
+    return $q;
   }
 
   function _findByServiceId($serviceId) {
