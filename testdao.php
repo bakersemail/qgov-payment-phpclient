@@ -11,5 +11,9 @@
   
   function _createServiceId() {
     return '123';
-  } 
+  }
+  
+  function _isPaid($serviceId) {
+    return false;
+  }
 ?>

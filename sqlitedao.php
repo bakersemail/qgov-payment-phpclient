@@ -16,7 +16,18 @@
     $q = $sql->exec("UPDATE SERVICES SET PAID=1 WHERE SERVICE_ID IN ($idsStr);");
     return $q;
   }
-
+  
+  function _isPaid($serviceId) {
+    $sql = createDb();
+    $q = $sql->query("SELECT PAID FROM SERVICES WHERE SERVICE_ID=$serviceId;");
+    while ($row = $q->fetchArray()) {
+      $value = $row['PAID'];
+      return "$value" === "1";
+    }
+    
+    return false;
+  }
+  
   function _findByServiceId($serviceId) {
     $sql = createDb();
     $q = $sql->query("SELECT ORDER_ID FROM SERVICES WHERE SERVICE_ID=$serviceId;");

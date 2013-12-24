@@ -18,6 +18,10 @@
     return _saveService($serviceId, $orderId);
   }
   
+  function isPaid($serviceId) {
+    return _isPaid($serviceId);
+  }
+  
   function createServiceId() {
     $result = _createServiceId();
     error_log("Creating Service ID: $result");
