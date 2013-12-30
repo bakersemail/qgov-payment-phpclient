@@ -1,7 +1,7 @@
 qgov-payment-phpclient
 ======================
 
-This is an unofficial client implementation of the Queensland Government Payment Gateway (PAPI). This code is not owned or supported at all by the Queensland Government and has no warrenties or guarantees. Feel free to extend, copy or do whatever you want with this code.
+This is an unofficial client implementation of the Queensland Government Payment Gateway (PAPI). This client is not owned or supported at all by the Queensland Government and has no warrenties or guarantees. Feel free to extend, copy or do whatever you want with this client.
 
 Set up:
 
