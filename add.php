@@ -2,6 +2,7 @@
   require_once 'config.php';
   require_once 'soapclient.php';
   require_once 'dao.php';
+  require_once 'cart_utils.php';
   
   function createRequest($cartId, $serviceId) {
     error_log("Adding to cart: $cartId");
@@ -38,7 +39,7 @@
     return str_replace($tokens, $values, $template);
   }
   
-  $cartId = $_REQUEST['ssqCartId'];
+  $cartId = getCartId();
   $serviceId = createServiceId();
   $body = createRequest($cartId, $serviceId);
   $namespace = 'http://smartservice.qld.gov.au/payment/schemas/shopping_cart_1_3';
@@ -48,6 +49,11 @@
     $xml = new SimpleXMLElement($cleanedForPhp);
     $orderId = $xml->xpath('//generatedOrderId');
     $orderId = $orderId[0];
+    
+    $cartId = $xml->xpath('//cartId');
+    $cartId = $cartId[0];
+    setCartId($cartId);
+    
     error_log("Successfully added to cart: $cartId with Order ID: $orderId");
     saveService($serviceId, $orderId);
     header("Location: shop.php");

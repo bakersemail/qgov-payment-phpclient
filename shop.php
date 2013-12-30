@@ -1,15 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <?php
   require_once 'config.php';
+  require_once 'cart_utils.php';
+
+  $cartId = getCartId();
   $ini = getIni();
   $papiDomainAndContext = $ini['papiDomainAndContext'];
-  
 
-  function getCartId() {
-    #TODO - get and set cartId from result in cookies so that javascript is not required.
-    #TODO - make use of synchronise to ensure that user sessions are sync'd with the target cart.
-  }
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-AU" lang="en-AU">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -151,7 +150,7 @@
             <p class="ssq-minicart-noscript">Edit cart or checkout to place your order.</p>
             <div class="ssq-minicart-submit">
               <input type="hidden" id="ssq-cart-contents" name="ssq-cart-contents" value="" /> 
-                <img src="<?php echo $papiDomainAndContext."/minicart/synchronise?cartId="?><?php getCartId();?>" id="ssq-synch-img" height="0" width="0" alt="" />
+                <img src="<?php echo $papiDomainAndContext."/minicart/synchronise?cartId="?><?php echo $cartId;?>" id="ssq-synch-img" height="0" width="0" alt="" />
                 <a href="<?php echo $papiDomainAndContext."/cart/checkout"?>" id="ssq-cart-checkout"><img id="ssq_minicart_checkout" src="<?php echo $papiDomainAndContext."/minicart/btn-checkout.png"?>" alt="Checkout" /></a>
                 <a href="<?php echo $papiDomainAndContext."/cart/view"?>" id="ssq-cart-edit"><img id="ssq_minicart_cart" src="<?php echo $papiDomainAndContext."/minicart/btn-cart.png"?>" alt="Edit cart" /></a>
             </div>
