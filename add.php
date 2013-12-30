@@ -2,7 +2,7 @@
   require_once 'config.php';
   require_once 'soapclient.php';
   require_once 'dao.php';
-  require_once 'cart_utils.php';
+  require_once 'cart_func.php';
   
   function createRequest($cartId, $serviceId) {
     error_log("Adding to cart: $cartId");

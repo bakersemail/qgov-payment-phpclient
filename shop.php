@@ -1,6 +1,6 @@
 <?php
   require_once 'config.php';
-  require_once 'cart_utils.php';
+  require_once 'cart_func.php';
 
   $cartId = getCartId();
   $ini = getIni();
