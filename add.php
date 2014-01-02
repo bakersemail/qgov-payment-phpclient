@@ -1,7 +1,4 @@
 <?php
-  require_once 'config.php';
-  require_once 'soapclient.php';
-  require_once 'dao.php';
   require_once 'cart_func.php';
   
   $title = "A product";
