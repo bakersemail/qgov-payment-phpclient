@@ -31,7 +31,7 @@
     
     $ini = getIni();
     $username = $ini['username'];
-    $serviceName = "Test service";#TODO - come from config
+    $serviceName = $ini['serviceName'];
     $context = $ini['context'];    
     $notifyUri = "http://$_SERVER[HTTP_HOST]$context/notify.php";
     $downloadUri = "http://$_SERVER[HTTP_HOST]$context/download.php";

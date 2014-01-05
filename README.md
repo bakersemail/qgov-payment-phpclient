@@ -17,4 +17,5 @@ e.g.
 	[site]
 	#used as base for: shop.php, notify.php and download.php 
 	context=/mywebsite
+	serviceName=My Service
 
