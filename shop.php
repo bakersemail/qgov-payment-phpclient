@@ -35,6 +35,8 @@
   <link type="text/css"
     href="<?php echo $papiDomainAndContext."/ui/minicart_1.0.css"?>"
     rel="stylesheet" />
+
+  <link type="text/css" rel="stylesheet" href="<?php echo $papiDomainAndContext."/minicart/synchronise?cartId="?><?php echo $cartId;?>" />
   <script  src="<?php echo $papiDomainAndContext."/minicart/contents_1.0.js"?>"
     type="text/javascript"></script>
     <script type="text/javascript" src="<?php echo $papiDomainAndContext."/outage/outage_warnings.js"?>"></script>
@@ -150,7 +152,6 @@
             <p class="ssq-minicart-noscript">Edit cart or checkout to place your order.</p>
             <div class="ssq-minicart-submit">
               <input type="hidden" id="ssq-cart-contents" name="ssq-cart-contents" value="" /> 
-                <img src="<?php echo $papiDomainAndContext."/minicart/synchronise?cartId="?><?php echo $cartId;?>" id="ssq-synch-img" height="0" width="0" alt="" />
                 <a href="<?php echo $papiDomainAndContext."/cart/checkout"?>" id="ssq-cart-checkout"><img id="ssq_minicart_checkout" src="<?php echo $papiDomainAndContext."/minicart/btn-checkout.png"?>" alt="Checkout" /></a>
                 <a href="<?php echo $papiDomainAndContext."/cart/view"?>" id="ssq-cart-edit"><img id="ssq_minicart_cart" src="<?php echo $papiDomainAndContext."/minicart/btn-cart.png"?>" alt="Edit cart" /></a>
             </div>
@@ -364,8 +365,6 @@
 
     
   
-
-
 <div id="scripts">
   <script type="text/javascript" src="//static.qgov.net.au/assets/v2/script/loader.js"></script>
   <script type="text/javascript" src="//static.qgov.net.au/assets/v2/script/init.js"></script>
