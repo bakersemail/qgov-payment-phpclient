@@ -122,6 +122,18 @@
         <input type="submit" value="Add" />
       </strong>
       </li>
+<?php
+if ($cartId) {?>
+      <li>
+      <strong>
+        <a class="button"
+          href="<?php echo $papiDomainAndContext."/minicart/synchronise?cartId=${cartId}&redirectUrl=cart/checkout"?>">
+          Checkout
+        </a>
+      </strong>
+    </li>
+<?php } ?>
+
     </ul>
     <script type="text/javascript"><!--     
       document.write('<input type="hidden" name="ssqCartId" value="' + SSQ.cart.id + '" />'); 
